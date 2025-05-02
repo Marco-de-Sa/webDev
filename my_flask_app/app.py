@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 # routes from exercise 1
@@ -14,9 +14,11 @@ def about():
 def contact():
     return 'Contact me at: example@gmail.com'
 
-@app.route('/hello/<name>')
-def hello(name):
-    return f'Hello, {name}! Welcome to my website.'
+@app.route('/profile/<name>')
+def profile(name):
+    age = 25 # Example static data
+    hobby = "Reading" # Example static data
+    return render_template('profile.html', name=name, age=age, hobby=hobby)
 
 if __name__ == '__main__':
     app.run(debug=True)
