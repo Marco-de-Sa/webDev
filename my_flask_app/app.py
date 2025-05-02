@@ -10,5 +10,13 @@ def home():
 def about():
     return 'This is the About page I made with Flask'
 
+@app.route('/contact')
+def contact():
+    return 'Contact me at: example@gmail.com'
+
+@app.route('/hello/<name>')
+def hello(name):
+    return f'Hello, {name}! Welcome to my website.'
+
 if __name__ == '__main__':
     app.run(debug=True)
