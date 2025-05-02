@@ -4,15 +4,15 @@ app = Flask(__name__)
 # routes from exercise 1
 @app.route('/')
 def home():
-    return 'Welcome to my website'
+    return render_template('home.html')
 
 @app.route('/about')
 def about():
-    return 'This is the About page I made with Flask'
+    return render_template('about.html')
 
 @app.route('/contact')
 def contact():
-    return 'Contact me at: example@gmail.com'
+    return render_template('contact.html')
 
 @app.route('/profile/<name>')
 def profile(name):
