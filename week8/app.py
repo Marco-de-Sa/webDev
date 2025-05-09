@@ -16,9 +16,8 @@ def search():
     keyword = request.args.get('keyword')
     if keyword:
         return f"Search results for: {keyword}"
-    else:
-        flash('Search keyword cannot be empty!', 'error')
-        return render_template('search.html')
+    flash('Search keyword cannot be empty!', 'error')
+    return render_template('search.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
