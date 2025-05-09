@@ -11,6 +11,7 @@ def greet():
         else:
             return f"Hello, {name}!"
     return render_template('greet.html')
+
 @app.route('/search')
 def search():
     keyword = request.args.get('keyword')
@@ -18,6 +19,13 @@ def search():
         return f"Search results for: {keyword}"
     flash('Search keyword cannot be empty!', 'error')
     return render_template('search.html')
+
+@app.route('/submit', methods=['get', 'POST'])
+def submit():
+    if request.method == 'POST':
+        flash('Thank you for submitting!', 'success')
+    return render_template('submit.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
