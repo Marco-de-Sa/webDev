@@ -1,0 +1,13 @@
+<form method="POST">
+    <input type="text" name="name" placeholder="Enter your name">
+    <button type="submit">Submit</button>
+</form>
+{% with messages = get_flashed_messages(category_filter=["error"]) %}
+{% if messages %}
+<ul>
+    {% for msg in messages %}
+    <li style="color:red;">{{ msg }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
