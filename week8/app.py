@@ -11,6 +11,14 @@ def greet():
         else:
             return f"Hello, {name}!"
     return render_template('greet.html')
+@app.route('/search')
+def search():
+    keyword = request.args.get('keyword')
+    if keyword:
+        return f"Search results for: {keyword}"
+    else:
+        flash('Search keyword cannot be empty!', 'error')
+        return render_template('search.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
