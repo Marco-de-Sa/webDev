@@ -18,7 +18,7 @@ def greet():
             flash('All fields are required!', 'error')
         else:
             with open('form_submissions.txt', 'a', encoding='utf-8') as f:
-                f.write(f"Name: {name}\nEmail: {email}\nDate: {date}\nNIF: {NIF}\n---\n")
+                f.write(f"Name: {name}\nEmail: {email}\nDate: {date}\nNIF: {NIF}\n\n")
             flash('Your form has been submitted!', 'success')
     return render_template('home.html')
 
