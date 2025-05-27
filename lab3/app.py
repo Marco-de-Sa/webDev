@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, flash
 
+# Ensure the file is empty at the start
 with open("form_submissions.txt", "r+") as f:
     f.seek(0)
     f.truncate()
@@ -28,7 +29,7 @@ def show_list():
         with open('form_submissions.txt', 'r', encoding='utf-8') as f:
             submissions = f.read()
     except FileNotFoundError:
-        submissions = "No submissions yet."
+        submissions = "No file found please make form_submission.txt first"
     return render_template('list.html', submissions=submissions)
 
 if __name__ == '__main__':
