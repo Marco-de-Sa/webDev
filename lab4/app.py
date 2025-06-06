@@ -1,9 +1,21 @@
 from flask import Flask, render_template, request, flash
+import datetime
+from peewee import *
 
-# Ensure the file is empty at the start
-with open("form_submissions.txt", "r+") as f:
-    f.seek(0)
-    f.truncate()
+db = SqliteDatabase('my_app.db')
+
+class BaseModel(Model):
+    class Meta:
+        database = db
+
+class User(BaseModel):
+    username = CharField(unique=True)
+
+class Tweet(BaseModel):
+    user = ForeignKeyField(User, backref='tweets')
+    message = TextField()
+    created_date = DateTimeField(default=datetime.datetime.now)
+    is_published = BooleanField(default=True)
 
 app = Flask(__name__)
 app.secret_key = 'secret_key'
