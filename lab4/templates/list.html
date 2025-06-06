@@ -3,6 +3,11 @@
 {% block content %}
 <h2>Submitted Information</h2>
 <div style="display: flex; justify-content: center;">
-    <pre>{{ submissions }}</pre>
+    {% for sub in submissions %}
+        Name: {{ sub.name }}<br>
+        Email: {{ sub.email }}<br>
+        Date: {{ sub.date }}<br>
+        NIF: {{ sub.nif }}<br><br>
+    {% endfor %}
 </div>
 {% endblock %}

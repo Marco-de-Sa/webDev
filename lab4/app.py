@@ -8,14 +8,14 @@ class BaseModel(Model):
     class Meta:
         database = db
 
-class User(BaseModel):
-    username = CharField(unique=True)
+class FormSubmission(BaseModel):
+    name = CharField()
+    email = CharField()
+    date = CharField()
+    nif = CharField()
 
-class Tweet(BaseModel):
-    user = ForeignKeyField(User, backref='tweets')
-    message = TextField()
-    created_date = DateTimeField(default=datetime.datetime.now)
-    is_published = BooleanField(default=True)
+db.connect()
+db.create_tables([FormSubmission], safe=True)
 
 app = Flask(__name__)
 app.secret_key = 'secret_key'
@@ -30,18 +30,15 @@ def greet():
         if not name or not email or not date or not NIF:
             flash('All fields are required!', 'error')
         else:
-            with open('form_submissions.txt', 'a', encoding='utf-8') as f:
-                f.write(f"Name: {name}\nEmail: {email}\nDate: {date}\nNIF: {NIF}\n\n")
+            # Save to database instead of file
+            FormSubmission.create(name=name, email=email, date=date, nif=NIF)
             flash('Your form has been submitted!', 'success')
     return render_template('home.html')
 
 @app.route('/list', methods=['GET', 'POST'])
 def show_list():
-    try:
-        with open('form_submissions.txt', 'r', encoding='utf-8') as f:
-            submissions = f.read()
-    except FileNotFoundError:
-        submissions = "No file found please make form_submission.txt first"
+    # Fetch all submissions from the database
+    submissions = FormSubmission.select()
     return render_template('list.html', submissions=submissions)
 
 if __name__ == '__main__':
