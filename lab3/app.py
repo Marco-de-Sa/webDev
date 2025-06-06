@@ -1,9 +1,15 @@
 from flask import Flask, render_template, request, flash
 
-# Ensure the file is empty at the start
-with open("form_submissions.txt", "r+") as f:
-    f.seek(0)
-    f.truncate()
+from peewee import *
+db = SqliteDatabase("patients.db")
+class Task(Model):
+    title = CharField()
+    status = CharField(default="pending")
+    class Meta:
+        database = db
+
+db.connect()
+db.create_tables([Task], safe=True)
 
 app = Flask(__name__)
 app.secret_key = 'secret_key'
