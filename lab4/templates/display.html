@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Database Contents{% endblock %}
+{% block content %}
+<h2>Users</h2>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Login</th>
+        <th>Password</th>
+        <th>Is Admin</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td>{{ user.id_user }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.login }}</td>
+        <td>{{ user.password }}</td>
+        <td>{{ user.is_admin }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Students</h2>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Birthdate</th>
+    </tr>
+    {% for student in students %}
+    <tr>
+        <td>{{ student.id_student }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ student.phone }}</td>
+        <td>{{ student.birthdate }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Classes</h2>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Class Name</th>
+        <th>Teacher ID</th>
+        <th>Date</th>
+        <th>Time</th>
+    </tr>
+    {% for c in classes %}
+    <tr>
+        <td>{{ c.id_class }}</td>
+        <td>{{ c.class_name }}</td>
+        <td>{{ c.id_user.id_user }}</td>
+        <td>{{ c.date }}</td>
+        <td>{{ c.time }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Attendance</h2>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Class ID</th>
+        <th>Student ID</th>
+        <th>Attend</th>
+    </tr>
+    {% for a in attendances %}
+    <tr>
+        <td>{{ a.id }}</td>
+        <td>{{ a.id_class.id_class }}</td>
+        <td>{{ a.id_student.id_student }}</td>
+        <td>{{ a.attend }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -3,15 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}My Flask Site{% endblock %}</title>
+    <title>{% block title %}Class Management{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css')
 }}">
 </head>
 
 <body>
     <nav>
-        <a href="/">Home</a> |
-        <a href="/list">information</a>
+        <a href="/">Login</a> |
+        <a href="/register">register</a> |
+        <a href="/display">display</a> |
     </nav>
     <hr>
     {% block content %}{% endblock %}

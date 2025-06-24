@@ -1,44 +1,67 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect, url_for
 from peewee import *
-
-db = SqliteDatabase('my_app.db')
-
-class BaseModel(Model):
-    class Meta:
-        database = db
-
-class FormSubmission(BaseModel):
-    name = CharField()
-    email = CharField()
-    date = CharField()
-    nif = CharField()
+from models import *
 
 db.connect()
-db.create_tables([FormSubmission], safe=True)
 
 app = Flask(__name__)
 app.secret_key = 'secret_key'
 
 @app.route('/', methods=['GET', 'POST'])
-def greet():
+def login():
+    User.update(login=False).execute()
     if request.method == 'POST':
-        name = request.form.get('Name')
-        email = request.form.get('Email')
-        date = request.form.get('Date')
-        NIF = request.form.get('NIF')
-        if not name or not email or not date or not NIF:
-            flash('All fields are required!', 'error')
+        name = request.form['name']
+        password = request.form['password']
+        user = User.select().where((User.name == name) & (User.password == password)).first()
+        if user:
+            user.login = True
+            user.save()
+            flash('Login successful!')
         else:
-            # Save to database instead of file
-            FormSubmission.create(name=name, email=email, date=date, nif=NIF)
-            flash('Your form has been submitted!', 'success')
-    return render_template('home.html')
+            flash('Invalid username or password!')
+            # return render_template('login.html')
+    return render_template('login.html')
 
-@app.route('/list', methods=['GET', 'POST'])
-def show_list():
-    # Fetch all submissions from the database
-    submissions = FormSubmission.select()
-    return render_template('list.html', submissions=submissions)
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    User.update(login=False).execute()
+    if request.method == 'POST':
+        name = request.form['name']
+        login = True
+        password = request.form['password']
+        is_admin = True if request.form.get('is_admin') == 'on' else False
+
+        if not name or not login or not password:
+            flash('All fields are required!')
+            return render_template('login.html')
+
+        try:
+            user = User.create(name=name, login=login, password=password, is_admin=is_admin)
+            flash('User registered successfully!')
+        except IntegrityError:
+            flash('Login already exists!')
+
+        return render_template('login.html')
+    return render_template('register.html')
+
+@app.route('/display')
+def display():
+    users = User.select()
+    students = Student.select()
+    classes = Class.select()
+    attendances = Attendance.select()
+    return render_template(
+        'display.html',
+        users=users,
+        students=students,
+        classes=classes,
+        attendances=attendances
+    )
 
 if __name__ == '__main__':
+    initialize_db()
+    # Set all login fields to False at startup
+    User.update(login=False).execute()
+    print("Database tables created.")
     app.run(debug=True)

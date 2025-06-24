@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<style>
+    .top-center-form {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        padding-top: 40px;
+        /* Adjust as needed */
+    }
+</style>
+<div class="top-center-form">
+    <form method="POST" action="/">
+        <label for="name">name:</label>
+        <input type="text" id="name" name="name" placeholder="Name" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <br>
+        <button type="submit">Login</button>
+    </form>
+</div>
+{% endblock %}
