@@ -51,6 +51,12 @@
             </tr>
             {% endfor %}
         </table>
+        <br>
+        {% if current_user and current_user.is_admin %}
+        <a href='/addTeacher' class="add-student-btn">
+            <button type="button">Add Teacher</button>
+        </a>
+        {% endif %}
     </div>
     <div>
         <h2>Students</h2>
@@ -73,9 +79,11 @@
             {% endfor %}
         </table>
         <br>
+        {% if current_user and current_user.is_admin %}
         <a href='/add_student' class="add-student-btn">
             <button type="button">Add Student</button>
         </a>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

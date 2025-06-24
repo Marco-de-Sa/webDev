@@ -67,7 +67,8 @@ def class_manage():
 def user_manage():
     users = User.select()
     students = Student.select()
-    return render_template('userManage.html', users=users, students=students)
+    current_user = User.select().where(User.login == True).first()
+    return render_template('userManage.html', users=users, students=students, current_user=current_user)
 
 @app.route('/add_student', methods=['GET', 'POST'])
 def add_student():
@@ -90,6 +91,26 @@ def add_student():
         except Exception as e:
             flash(f'Error: {e}')
     return render_template('addStudent.html')
+
+@app.route('/addTeacher', methods=['GET', 'POST'])
+def add_teacher():
+    if request.method == 'POST':
+        name = request.form['name']
+        password = request.form['password']
+        try:
+            User.create(
+                name=name,
+                password=password,
+                is_admin=False,
+                login=False
+            )
+            flash('Teacher added successfully!')
+            return redirect("/users")
+        except IntegrityError:
+            flash('Teacher with this name already exists!')
+        except Exception as e:
+            flash(f'Error: {e}')
+    return render_template('addTeacher.html')
 
 if __name__ == '__main__':
     initialize_db()
