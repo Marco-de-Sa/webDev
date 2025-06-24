@@ -1,0 +1,10 @@
+{% extends "dashboard.html" %}
+{% block content %}
+    {% if user %}
+        <h2>Welcome, {{ user.name }}!</h2>
+        <p>You are now logged in{{ " as admin" if user.is_admin else "" }}.</p>
+    {% else %}
+        <h2>Welcome!</h2>
+        <p>No user is currently logged in.</p>
+    {% endif %}
+{% endblock %}

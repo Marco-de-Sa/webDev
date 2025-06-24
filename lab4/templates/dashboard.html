@@ -1,5 +1,21 @@
-{% extends "base.html" %}
-{% block title %}Database Contents{% endblock %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>Class Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')
+}}">
+</head>
+
+<body>
+    <nav>
+        <a href="/">Login</a> |
+        <a href="/register">register</a> |
+        <a href="/display">display</a> |
+    </nav>
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+
+</html>

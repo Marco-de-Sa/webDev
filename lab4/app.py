@@ -18,6 +18,7 @@ def login():
             user.login = True
             user.save()
             flash('Login successful!')
+            return redirect("/welcome")
         else:
             flash('Invalid username or password!')
             # return render_template('login.html')
@@ -58,6 +59,11 @@ def display():
         classes=classes,
         attendances=attendances
     )
+
+@app.route('/welcome')
+def dash_welcome():
+    user = User.select().where(User.login == True).first()
+    return render_template('dashWelcome.html', user=user)
 
 if __name__ == '__main__':
     initialize_db()
