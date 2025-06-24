@@ -65,6 +65,14 @@ def dash_welcome():
     user = User.select().where(User.login == True).first()
     return render_template('dashWelcome.html', user=user)
 
+@app.route('/classes')
+def class_manage():
+    return render_template('classManage.html')
+
+@app.route('/users')
+def user_manage():
+    return render_template('userManage.html')
+
 if __name__ == '__main__':
     initialize_db()
     # Set all login fields to False at startup

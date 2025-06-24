@@ -4,15 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Class Management</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')
-}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <style>
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .logout-link {
+            margin-left: auto;
+        }
+    </style>
 </head>
 
 <body>
     <nav>
-        <a href="/">Login</a> |
-        <a href="/register">register</a> |
-        <a href="/display">display</a> |
+        <div class="nav-links">
+            <a href="/welcome">Welcome page</a> |
+            <a href="/classes">Classes</a> |
+            <a href="/users">Users and Students</a> |
+        </div>
+        <a href="/" class="logout-link">Logout</a>
     </nav>
     <hr>
     {% block content %}{% endblock %}
