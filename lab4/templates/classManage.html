@@ -73,13 +73,11 @@
             </tr>
             {% endfor %}
         </table>
-        {% if current_user and current_user.is_admin and current_user.login %}
         <div class="add-class-btn">
             <a href="/takeAttendance">
                 <button type="button">Take Attendance</button>
             </a>
         </div>
-        {% endif %}
     </div>
 </div>
 {% endblock %}
