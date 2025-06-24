@@ -21,7 +21,6 @@ def login():
             return redirect("/welcome")
         else:
             flash('Invalid username or password!')
-            # return render_template('login.html')
     return render_template('login.html')
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -154,7 +153,7 @@ def take_attendance():
                 attend=bool(int(attend))
             )
             flash('Attendance recorded successfully!')
-            return redirect("/classes")  # Redirect to classManage.html
+            return redirect("/classes")
         except IntegrityError:
             flash('Attendance for this student in this class already exists!')
         except Exception as e:
