@@ -61,7 +61,10 @@ def dash_welcome():
 
 @app.route('/classes')
 def class_manage():
-    return render_template('classManage.html')
+    classes = Class.select()
+    attendances = Attendance.select()
+    current_user = User.select().where((User.login == True) & (User.is_admin == True)).first()
+    return render_template('classManage.html', classes=classes, attendances=attendances, current_user=current_user)
 
 @app.route('/users')
 def user_manage():
@@ -111,6 +114,52 @@ def add_teacher():
         except Exception as e:
             flash(f'Error: {e}')
     return render_template('addTeacher.html')
+
+@app.route('/addClass', methods=['GET', 'POST'])
+def add_class():
+    if request.method == 'POST':
+        class_name = request.form['class_name']
+        try:
+            teacher_id = int(request.form['teacher_id'])
+        except ValueError:
+            flash('Teacher ID must be an integer!')
+            return render_template('addClass.html')
+        schedule = request.form['schedule']
+        time = request.form['time']
+        try:
+            Class.create(
+                class_name=class_name,
+                id_user=teacher_id,   
+                date=schedule,        
+                time=time
+            )
+            flash('Class added successfully!')
+            return redirect("/classes")
+        except IntegrityError:
+            flash('Class with this name already exists!')
+        except Exception as e:
+            flash(f'Error: {e}')
+    return render_template('addClass.html')
+
+@app.route('/takeAttendance', methods=['GET', 'POST'])
+def take_attendance():
+    if request.method == 'POST':
+        id_class = request.form.get('id_class')
+        id_student = request.form.get('id_student')
+        attend = request.form.get('attend')
+        try:
+            Attendance.create(
+                id_class=id_class,
+                id_student=id_student,
+                attend=bool(int(attend))
+            )
+            flash('Attendance recorded successfully!')
+            return redirect("/classes")  # Redirect to classManage.html
+        except IntegrityError:
+            flash('Attendance for this student in this class already exists!')
+        except Exception as e:
+            flash(f'Error: {e}')
+    return render_template('takeAttendance.html')
 
 if __name__ == '__main__':
     initialize_db()
