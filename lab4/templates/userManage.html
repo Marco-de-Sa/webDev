@@ -1,4 +1,81 @@
 {% extends "dashboard.html" %}
 {% block content %}
-    <p>test1</p>
+<style>
+    .side-by-side-tables {
+        display: flex;
+        gap: 40px;
+        justify-content: center;
+        align-items: flex-start;
+        margin-top: 30px;
+    }
+
+    .side-by-side-tables table {
+        background: #fff;
+        border-collapse: collapse;
+        min-width: 320px;
+    }
+
+    .side-by-side-tables th,
+    .side-by-side-tables td {
+        border: 1px solid #ccc;
+        padding: 6px 12px;
+        text-align: left;
+    }
+
+    .side-by-side-tables th {
+        background: #f5f5f5;
+    }
+    .add-student-btn {
+        margin-bottom: 16px;
+        display: inline-block;
+    }
+</style>
+<div class="side-by-side-tables">
+    <div>
+        <h2>Users</h2>
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Login</th>
+                <th>Password</th>
+                <th>Is Admin</th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id_user }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.login }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.is_admin }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div>
+        <h2>Students</h2>
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Birthdate</th>
+            </tr>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.id_student }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.phone }}</td>
+                <td>{{ student.birthdate }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <a href='/add_student' class="add-student-btn">
+            <button type="button">Add Student</button>
+        </a>
+    </div>
+</div>
 {% endblock %}

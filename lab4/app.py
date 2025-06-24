@@ -52,13 +52,7 @@ def display():
     students = Student.select()
     classes = Class.select()
     attendances = Attendance.select()
-    return render_template(
-        'display.html',
-        users=users,
-        students=students,
-        classes=classes,
-        attendances=attendances
-    )
+    return render_template('display.html', users=users, students=students, classes=classes, attendances=attendances)
 
 @app.route('/welcome')
 def dash_welcome():
@@ -71,7 +65,31 @@ def class_manage():
 
 @app.route('/users')
 def user_manage():
-    return render_template('userManage.html')
+    users = User.select()
+    students = Student.select()
+    return render_template('userManage.html', users=users, students=students)
+
+@app.route('/add_student', methods=['GET', 'POST'])
+def add_student():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        phone = request.form['phone'] or None
+        birthdate = request.form['birthdate']
+        try:
+            Student.create(
+                name=name,
+                email=email,
+                phone=phone,
+                birthdate=birthdate
+            )
+            flash('Student added successfully!')
+            return redirect("/users")
+        except IntegrityError:
+            flash('Email already exists!')
+        except Exception as e:
+            flash(f'Error: {e}')
+    return render_template('addStudent.html')
 
 if __name__ == '__main__':
     initialize_db()
