@@ -6,24 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV page</title>
     <style>
-        header, main, footer {
+        header,
+        main,
+        footer {
             border: 1px solid black;
+            width: 1260px;
+            margin: 0 auto;
+        }
+
+        main {
+            float: middle;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        body {
+            font-family: "trebuchet MS", Arial, Helvetica, sans-serif;
+        }
+
+        aside {
+            background-color: rgb(0, 119, 255);
+            width: 400px;
+            float: left;
+        }
+
+        article {
+            width: 858px;
+            float: right;
         }
     </style>
 </head>
 
 <body>
-    <main>
-        <header>
-            <h1>My CV</h1>
-        </header>
-            
+    <header>
+        <h1>My CV</h1>
+    </header>
+    <main class="clearfix">
+
         <aside>
             <picture>
                 <img src="profile.png" alt="Profile Picture" width="150" height="200">
             </picture>
             <p>name: john doe</p>
-            <p>work/study</p>
+            <p>work/study: software engineer</p>
             <p>resumé</p>
             <p>resumé</p>
             <p>resumé</p>
@@ -49,10 +78,10 @@
         </article>
 
     </main>
+
     <footer>
         <p>footer</p>
     </footer>
-
 </body>
 
 </html>
