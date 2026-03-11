@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV page</title>
+    <style>
+        header,
+        main,
+        footer {
+            border: 1px solid black;
+            width: 1260px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+        }
+
+        main {
+            display: flex;
+        }
+
+        nav{
+            margin-top: 10px;
+        }
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        body {
+            font-family: "trebuchet MS", Arial, Helvetica, sans-serif;
+        }
+
+        aside {
+            background-color: rgb(0, 119, 255);
+            flex: 400;
+        }
+
+        article {
+            flex: 840;
+        }
+        @media (max-width: 800px){
+            aside{
+                background-color: red;
+            }
+
+            aside, article{
+                flex: 1;
+            }
+        }
+        @media (max-width: 500px){
+            main {
+                display: block;
+            }
+            aside, article{
+                width: 100%;
+            }
+            aside{
+                background-color: green;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <nav>
+        <header>
+            <h1>My CV</h1>
+        </header>
+    </nav>
+    <main class="clearfix">
+
+        <aside>
+            <picture>
+                <img src="profile.png" alt="Profile Picture" width="150" height="200">
+            </picture>
+            <p>name: John Pork</p>
+            <p>work/study: software engineer</p>
+            <p>resumé</p>
+            <p>resumé</p>
+            <p>resumé</p>
+        </aside>
+        <article>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Aenean sit amet elit magna, eu egestas urna. Donec lobortis
+                magna nec urna sagittis sit amet blandit justo porta. Mauris
+                sagittis nulla id urna tempus nec euismod erat tristique.
+                Etiam dui orci, vehicula ac sodales a, bibendum ac mi. Donec
+                porta risus quis diam varius nec porttitor purus commodo.
+                Curabitur nunc massa, adipiscing in sodales ac, bibendum
+                vitae odio. Aliquam at odio tellus. Fusce auctor tristique
+                turpis, nec tempor velit imperdiet quis. Donec quis velit arcu.
+                Aliquam vel viverra eros. Morbi ante mi, cursus at vehicula
+                vel, ultrices ut sapien. Cras aliquet tempus turpis, vel facilisis
+                leo dictum a. Fusce tempor, sem a iaculis suscipit, felis lectus
+                feugiat leo, eu rutrum nisl tortor semper ante. Aliquam sit
+                amet consequat arcu. Proin fermentum nunc non orci
+                porttitor consectetur
+            </p>
+        </article>
+
+    </main>
+
+    <footer>
+        <p>footer</p>
+    </footer>
+</body>
+
+</html>
