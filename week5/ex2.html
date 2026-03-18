@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            color:black;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id = "box">Text example</div>
+    <button onclick="changeStyle()">Click</button>
+    <script>
+        var ptext = document.getElementById("box");
+        function changeStyle() {
+            if (ptext.style.color == "red") {
+                ptext.style.color = "black";
+                ptext.style.fontSize = "20px";
+            } else {
+                ptext.style.color = "red";
+                ptext.style.fontSize = "40px"
+            }
+        }
+    </script>
+</body>
+</html>
