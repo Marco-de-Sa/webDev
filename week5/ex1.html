@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+</head>
+<body>
+    <p id = "text">text example</p>
+    <button onclick="toggleVisibility()">Hide / Show</button>
+    <button onclick="changeText()">Change text</button>
     <script>
+        var ptext = document.getElementById("text");
         function toggleVisibility() {
-            var ptext = document.getElementById("text");
             if (ptext.style.display == "none"){
                 ptext.style.display = "block";
             }else{ 
@@ -14,13 +19,12 @@
             }
         }
         function changeText() {
-            document.getElementById("text").innerHTML = "Changed";
+            if (ptext.innerHTML == "Changed") {
+                ptext.innerHTML = "text example";
+            } else {
+                ptext.innerHTML = "Changed";
+            }
         }
     </script>
-</head>
-<body>
-    <p id = "text">text example</p>
-    <button onclick="toggleVisibility()">Hide / Show</button>
-    <button onclick="changeText()">Change text</button>
 </body>
 </html>
