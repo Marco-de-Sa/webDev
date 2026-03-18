@@ -6,8 +6,13 @@
     <title>Document</title>
     <script>
         function toggleVisibility() {
-            document.getElementById("text").style.display = "none";
-
+            if (document.getElementById("text").style.display == "none")
+                document.getElementById("text").style.display = "block";
+            else 
+                document.getElementById("text").style.display = "none";
+          }
+        function changeText() {
+            document.getElementById("text").innerHTML = "Changed";
         }
     </script>
 </head>
