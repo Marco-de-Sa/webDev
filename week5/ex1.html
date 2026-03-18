@@ -6,11 +6,13 @@
     <title>Document</title>
     <script>
         function toggleVisibility() {
-            if (document.getElementById("text").style.display == "none")
-                document.getElementById("text").style.display = "block";
-            else 
-                document.getElementById("text").style.display = "none";
-          }
+            var ptext = document.getElementById("text");
+            if (ptext.style.display == "none"){
+                ptext.style.display = "block";
+            }else{ 
+                ptext.style.display = "none";
+            }
+        }
         function changeText() {
             document.getElementById("text").innerHTML = "Changed";
         }
